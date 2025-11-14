@@ -4,11 +4,7 @@ language_tabs:
   - shell: Shell
   - http: HTTP
   - javascript: JavaScript
-  - ruby: Ruby
-  - python: Python
-  - php: PHP
   - java: Java
-  - go: Go
 toc_footers: []
 includes: []
 search: true
@@ -24,8 +20,6 @@ generator: "@tarslib/widdershins v4.0.30"
 Base URLs:
 
 * <a href="http://localhost:8080">Develop Env: http://localhost:8080</a>
-
-# Authentication
 
 # Medicines
 

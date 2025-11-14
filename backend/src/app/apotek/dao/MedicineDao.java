@@ -319,6 +319,7 @@ public class MedicineDao {
         it.stock = rs.getInt("stock");
         it.minStock = rs.getInt("min_stock");
         it.expiryDate = rs.getDate("expiry_date");
+        it.status = Status.valueOf(rs.getString("status"));
         it.createdAt = rs.getLong("created_ms");
         it.updatedAt = rs.getLong("updated_ms");
         return it;

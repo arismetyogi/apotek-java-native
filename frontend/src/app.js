@@ -1,5 +1,5 @@
 // src/app.js
-import { listMedicines, createMedicine, updateMedicine, deleteMedicine, adjustStock } from "./api.js";
+import { listMedicines, createMedicine, updateMedicine, deleteMedicine, adjustStock, getLowStockMedicines, getNearExpiryMedicines } from "./api.js";
 
 const state = { q: "", page: 0, size: 10, totalPages: 0, editingId: null, adjustingId: null };
 

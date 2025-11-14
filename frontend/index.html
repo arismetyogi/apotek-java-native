@@ -9,46 +9,135 @@
 </head>
 
 <body>
-    <header class="container">
-        <h1>Apotek Sehat Sentosa</h1>
-        <div class="toolbar">
-            <input id="searchInput" type="search" placeholder="Cari nama obat..." />
-            <button id="btnSearch">Search</button>
-            <button id="btnNew">+ Obat Baru</button>
+    <header>
+        <div class="header-container">
+            <h1>Apotek Sehat Sentosa</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#medicine" class="nav-link active">Medicine</a></li>
+                    <li><a href="#patients" class="nav-link">Patients</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nama</th>
-                        <th>Unit</th>
-                        <th>Harga</th>
-                        <th class="num">Stock</th>
-                        <th class="num">Minimum Stock</th>
-                        <th>Exp. Date</th>
-                        <th>Status</th>
-                        <th class="center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody"></tbody>
-            </table>
-        </div>
-        <div class="pagination">
-            <button id="prevPage">&lt; Prev</button>
-            <span id="pageInfo"></span>
-            <button id="nextPage">Next &gt;</button>
-            <label class="page-size">Size:
-                <select id="sizeSel">
-                    <option>5</option>
-                    <option selected>10</option>
-                    <option>20</option>
-                </select>
-            </label>
-        </div>
+    <main>
+        <section id="medicine" class="active-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Medicine Inventory</h2>
+                    <div class="toolbar">
+                        <input id="searchInput" type="search" placeholder="Cari nama obat..." />
+                        <button id="btnSearch" class="btn search-btn">Search</button>
+                        <button id="btnNew" class="btn primary-btn">+ Obat Baru</button>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Unit</th>
+                                <th>Harga</th>
+                                <th class="num">Stock</th>
+                                <th class="num">Minimum Stock</th>
+                                <th>Exp. Date</th>
+                                <th>Status</th>
+                                <th class="center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                </div>
+                <div class="pagination">
+                    <button id="prevPage" class="btn">Prev</button>
+                    <span id="pageInfo"></span>
+                    <button id="nextPage" class="btn">Next</button>
+                    <label class="page-size">Size:
+                        <select id="sizeSel" class="btn">
+                            <option>5</option>
+                            <option selected>10</option>
+                            <option>20</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section id="patients">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Patients</h2>
+                    <div class="toolbar">
+                        <input type="search" placeholder="Cari pasien..." class="btn" />
+                        <button class="btn search-btn">Search</button>
+                        <button class="btn primary-btn">+ Tambah Pasien</button>
+                    </div>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nama</th>
+                                <th>Umur</th>
+                                <th>Alamat</th>
+                                <th>Nomor Telepon</th>
+                                <th>Penyakit</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>John Doe</td>
+                                <td>35</td>
+                                <td>Jl. Merdeka No. 10</td>
+                                <td>081234567890</td>
+                                <td>Diabetes</td>
+                                <td><span class="status active">Aktif</span></td>
+                                <td>
+                                    <button class="btn view-btn">View</button>
+                                    <button class="btn edit-btn">Edit</button>
+                                    <button class="btn remove-btn">Hapus</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Jane Smith</td>
+                                <td>28</td>
+                                <td>Jl. Sudirman No. 5</td>
+                                <td>081234567891</td>
+                                <td>Hipertensi</td>
+                                <td><span class="status active">Aktif</span></td>
+                                <td>
+                                    <button class="btn view-btn">View</button>
+                                    <button class="btn edit-btn">Edit</button>
+                                    <button class="btn remove-btn">Hapus</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <button class="btn">Prev</button>
+                    <span>1 of 3</span>
+                    <button class="btn">Next</button>
+                    <label class="page-size">Size:
+                        <select class="btn">
+                            <option>5</option>
+                            <option selected>10</option>
+                            <option>20</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Dialog Create/Edit -->
@@ -69,8 +158,8 @@
                 </select></label>
             </div>
             <menu>
-                <button value="cancel" class="secondary">Batal</button>
-                <button value="default" class="primary">Simpan</button>
+                <button value="cancel" class="btn cancel-btn">Batal</button>
+                <button value="default" class="btn primary-btn">Simpan</button>
             </menu>
         </form>
     </dialog>
@@ -82,8 +171,8 @@
             <p>Masukkan delta (contoh: <code>10</code> atau <code>-5</code>)</p>
             <label>Delta <input name="delta" type="number" step="1" required /></label>
             <menu>
-                <button value="cancel" class="secondary">Batal</button>
-                <button value="default" class="primary">Update Stok</button>
+                <button value="cancel" class="btn cancel-btn">Batal</button>
+                <button value="default" class="btn primary-btn">Update Stok</button>
             </menu>
         </form>
     </dialog>
