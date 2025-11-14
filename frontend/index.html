@@ -10,9 +10,9 @@
 
 <body>
     <header class="container">
-        <h1>Inventory UI</h1>
+        <h1>Apotek Sehat Sentosa</h1>
         <div class="toolbar">
-            <input id="searchInput" type="search" placeholder="Cari nama / SKU..." />
+            <input id="searchInput" type="search" placeholder="Cari nama obat..." />
             <button id="btnSearch">Search</button>
             <button id="btnNew">+ Obat Baru</button>
         </div>
@@ -28,8 +28,10 @@
                         <th>Unit</th>
                         <th>Harga</th>
                         <th class="num">Stock</th>
-                        <th class="num">Status</th>
-                        <th>Aksi</th>
+                        <th class="num">Minimum Stock</th>
+                        <th>Exp. Date</th>
+                        <th>Status</th>
+                        <th class="center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="tbody"></tbody>
@@ -60,7 +62,11 @@
                 <label>Stock <input name="stock" type="number" min="0" step="1" required /></label>
                 <label>Min Stock <input name="minStock" type="number" min="0" step="1" required /></label>
                 <label>Tgl Expire <input name="expiryDate" type="date" min="0" step="1" required /></label>
-                <label>Status <input name="status" required /></label>
+                <label>Status <select name="status" required>
+                    <option value="" selected disabled>Pilih Status</option>
+                    <option value="ACTIVE">Aktif</option>
+                    <option value="INACTIVE">Non Aktif</option>
+                </select></label>
             </div>
             <menu>
                 <button value="cancel" class="secondary">Batal</button>

@@ -279,6 +279,10 @@ th {
     padding: 14px 16px;
 }
 
+th.center {
+    text-align: center;
+}
+
 td.num {
     text-align: right;
 }

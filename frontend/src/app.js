@@ -1,7 +1,5 @@
 // src/app.js
-import PharmacyAPI from "./api.js";
-
-const {getMedicines} = new PharmacyAPI();
+import { listMedicines, createMedicine, updateMedicine, deleteMedicine, adjustStock } from "./api.js";
 
 const state = { q: "", page: 0, size: 10, totalPages: 0, editingId: null, adjustingId: null };
 
@@ -47,7 +45,10 @@ function getForm(form) {
 
 async function load() {
     try {
-        const data = await getMedicines({ q: state.q, page: state.page, size: state.size });
+        const data = await listMedicines({ q: state.q, page: state.page, size: state.size });
+
+        console.log(data);
+        
         renderTable(data.content);
         state.totalPages = data.totalPages;
         els.pageInfo.textContent = `Page ${state.page + 1} / ${Math.max(1, state.totalPages)}`;
@@ -73,11 +74,13 @@ function renderTable(rows) {
         const tr = document.createElement("tr");
         tr.innerHTML = `
       <td>${it.id}</td>
-      <td><span class="badge">${escapeHtml(it.sku)}</span></td>
-      <td>${escapeHtml(it.name)}</td>
-      <td>${escapeHtml(it.category)}</td>
-      <td class="num">${it.quantity}</td>
-      <td class="num">${money(it.unitPrice)}</td>
+      <td><span class="badge">${escapeHtml(it.name)}</span></td>
+      <td>${escapeHtml(it.unit)}</td>
+      <td>${money(it.price)}</td>
+      <td class="num">${it.stock}</td>
+      <td class="num">${it.minStock}</td>
+      <td class="num">${it.expiryDate}</td>
+      <td class="num">${escapeHtml(it.status)}</td>
       <td>
         <div class="actions">
           <button class="btn" data-act="edit">Edit</button>
@@ -123,8 +126,8 @@ els.formItem.addEventListener("submit", async (e) => {
     payload.quantity = Number(payload.quantity);
     payload.unitPrice = String(payload.unitPrice);
     try {
-        if (state.editingId == null) await createItem(payload);
-        else await updateItem(state.editingId, payload);
+        if (state.editingId == null) await createMedicine(payload);
+        else await updateMedicine(state.editingId, payload);
         els.dlgItem.close();
         await load();
     } catch (e) {
@@ -154,7 +157,7 @@ els.formAdjust.addEventListener("submit", async (e) => {
 async function doDelete(it) {
     if (!confirm(`Hapus item #${it.id} (${it.name}) ?`)) return;
     try {
-        await deleteItem(it.id);
+        await deleteMedicine(it.id);
         await load();
     } catch (e) {
         alert(errMsg(e));
