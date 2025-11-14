@@ -12,14 +12,15 @@ code_clipboard: true
 highlight_theme: darkula
 headingLevel: 2
 generator: "@tarslib/widdershins v4.0.30"
-
 ---
 
-# Default module
+# API Documentation
+
+🔙 [Main Readme File](./README.md)
 
 Base URLs:
 
-* <a href="http://localhost:8080">Develop Env: http://localhost:8080</a>
+- <a href="http://localhost:8080">Development Env: http://localhost:8080</a>
 
 # Medicines
 
@@ -104,31 +105,31 @@ GET /medicines
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| HTTP Status Code | Meaning                                                 | Description | Data schema |
+| ---------------- | ------------------------------------------------------- | ----------- | ----------- |
+| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline      |
 
 ### Responses Data Schema
 
 HTTP Status Code **200**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» content|[object]|true|none||none|
-|»» id|integer|true|none||none|
-|»» name|string|true|none||none|
-|»» unit|string|true|none||none|
-|»» price|integer|true|none||none|
-|»» stock|integer|true|none||none|
-|»» minStock|integer|true|none||none|
-|»» expiryDate|string|true|none||none|
-|»» status|null|true|none||none|
-|»» createdAt|integer|true|none||none|
-|»» updatedAt|integer|true|none||none|
-|» page|integer|true|none||none|
-|» size|integer|true|none||none|
-|» totalElements|integer|true|none||none|
-|» totalPages|integer|true|none||none|
+| Name            | Type     | Required | Restrictions | Title | description |
+| --------------- | -------- | -------- | ------------ | ----- | ----------- |
+| » content       | [object] | true     | none         |       | none        |
+| »» id           | integer  | true     | none         |       | none        |
+| »» name         | string   | true     | none         |       | none        |
+| »» unit         | string   | true     | none         |       | none        |
+| »» price        | integer  | true     | none         |       | none        |
+| »» stock        | integer  | true     | none         |       | none        |
+| »» minStock     | integer  | true     | none         |       | none        |
+| »» expiryDate   | string   | true     | none         |       | none        |
+| »» status       | null     | true     | none         |       | none        |
+| »» createdAt    | integer  | true     | none         |       | none        |
+| »» updatedAt    | integer  | true     | none         |       | none        |
+| » page          | integer  | true     | none         |       | none        |
+| » size          | integer  | true     | none         |       | none        |
+| » totalElements | integer  | true     | none         |       | none        |
+| » totalPages    | integer  | true     | none         |       | none        |
 
 ## POST create
 
@@ -150,9 +151,9 @@ POST /medicines
 
 ### Params
 
-|Name|Location|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object| yes |none|
+| Name | Location | Type   | Required | Description |
+| ---- | -------- | ------ | -------- | ----------- |
+| body | body     | object | yes      | none        |
 
 > Response Examples
 
@@ -160,41 +161,41 @@ POST /medicines
 
 ```json
 {
-  "id": 0,
-  "name": "string",
-  "unit": "string",
-  "price": 0,
-  "stock": 0,
-  "minStock": 0,
-  "expiryDate": "string",
-  "status": "string",
-  "createdAt": 0,
+  "id": 1,
+  "name": "Nutrimax B Complex",
+  "unit": "BTL",
+  "price": 120000,
+  "stock": 4,
+  "minStock": 6,
+  "expiryDate": "2025-11-30",
+  "status": "ACTIVE",
+  "createdAt": 1763130231873,
   "updatedAt": 0
 }
 ```
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|none|Inline|
+| HTTP Status Code | Meaning                                                      | Description | Data schema |
+| ---------------- | ------------------------------------------------------------ | ----------- | ----------- |
+| 201              | [Created](https://tools.ietf.org/html/rfc7231#section-6.3.2) | none        | Inline      |
 
 ### Responses Data Schema
 
 HTTP Status Code **201**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» id|integer|true|none||none|
-|» name|string|true|none||none|
-|» unit|string|true|none||none|
-|» price|integer|true|none||none|
-|» stock|integer|true|none||none|
-|» minStock|integer|true|none||none|
-|» expiryDate|string|true|none||none|
-|» status|string|true|none||none|
-|» createdAt|integer|true|none||none|
-|» updatedAt|integer|true|none||none|
+| Name         | Type    | Required | Restrictions | Title | description |
+| ------------ | ------- | -------- | ------------ | ----- | ----------- |
+| » id         | integer | true     | none         |       | none        |
+| » name       | string  | true     | none         |       | none        |
+| » unit       | string  | true     | none         |       | none        |
+| » price      | integer | true     | none         |       | none        |
+| » stock      | integer | true     | none         |       | none        |
+| » minStock   | integer | true     | none         |       | none        |
+| » expiryDate | string  | true     | none         |       | none        |
+| » status     | string  | true     | none         |       | none        |
+| » createdAt  | integer | true     | none         |       | none        |
+| » updatedAt  | integer | true     | none         |       | none        |
 
 ## GET getOne
 
@@ -221,26 +222,26 @@ GET /medicines/4
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| HTTP Status Code | Meaning                                                 | Description | Data schema |
+| ---------------- | ------------------------------------------------------- | ----------- | ----------- |
+| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline      |
 
 ### Responses Data Schema
 
 HTTP Status Code **200**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» id|integer|true|none||none|
-|» name|string|true|none||none|
-|» unit|string|true|none||none|
-|» price|integer|true|none||none|
-|» stock|integer|true|none||none|
-|» minStock|integer|true|none||none|
-|» expiryDate|string|true|none||none|
-|» status|null|true|none||none|
-|» createdAt|integer|true|none||none|
-|» updatedAt|integer|true|none||none|
+| Name         | Type    | Required | Restrictions | Title | description |
+| ------------ | ------- | -------- | ------------ | ----- | ----------- |
+| » id         | integer | true     | none         |       | none        |
+| » name       | string  | true     | none         |       | none        |
+| » unit       | string  | true     | none         |       | none        |
+| » price      | integer | true     | none         |       | none        |
+| » stock      | integer | true     | none         |       | none        |
+| » minStock   | integer | true     | none         |       | none        |
+| » expiryDate | string  | true     | none         |       | none        |
+| » status     | null    | true     | none         |       | none        |
+| » createdAt  | integer | true     | none         |       | none        |
+| » updatedAt  | integer | true     | none         |       | none        |
 
 ## PUT update
 
@@ -262,23 +263,34 @@ PUT /medicines/5
 
 ### Params
 
-|Name|Location|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object| yes |none|
+| Name | Location | Type   | Required | Description |
+| ---- | -------- | ------ | -------- | ----------- |
+| body | body     | object | yes      | none        |
 
 > Response Examples
 
 > 200 Response
 
 ```json
-{}
+{
+  "id": 5,
+  "name": "Procold Tab",
+  "unit": "STR",
+  "price": 5500,
+  "stock": 12,
+  "minStock": 6,
+  "expiryDate": "2028-10-31",
+  "status": "ACTIVE",
+  "createdAt": 1763130231873,
+  "updatedAt": 1763130251873
+}
 ```
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| HTTP Status Code | Meaning                                                 | Description | Data schema |
+| ---------------- | ------------------------------------------------------- | ----------- | ----------- |
+| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline      |
 
 ### Responses Data Schema
 
@@ -292,23 +304,23 @@ DELETE /medicines/5
 
 ```json
 {
-  "status": "string"
+  "status": "DELETED"
 }
 ```
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| HTTP Status Code | Meaning                                                 | Description | Data schema |
+| ---------------- | ------------------------------------------------------- | ----------- | ----------- |
+| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline      |
 
 ### Responses Data Schema
 
 HTTP Status Code **200**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» status|string|true|none||none|
+| Name     | Type   | Required | Restrictions | Title | description |
+| -------- | ------ | -------- | ------------ | ----- | ----------- |
+| » status | string | true     | none         |       | none        |
 
 ## GET getLowStocks
 
@@ -364,39 +376,39 @@ GET /medicines/low-stock
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|none|Inline|
+| HTTP Status Code | Meaning                                                          | Description | Data schema |
+| ---------------- | ---------------------------------------------------------------- | ----------- | ----------- |
+| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)          | none        | Inline      |
+| 400              | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1) | none        | Inline      |
 
 ### Responses Data Schema
 
 HTTP Status Code **200**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» content|[object]|true|none||none|
-|»» id|integer|true|none||none|
-|»» name|string|true|none||none|
-|»» unit|string|true|none||none|
-|»» price|integer|true|none||none|
-|»» stock|integer|true|none||none|
-|»» minStock|integer|true|none||none|
-|»» expiryDate|string|true|none||none|
-|»» status|null|true|none||none|
-|»» createdAt|integer|true|none||none|
-|»» updatedAt|integer|true|none||none|
-|» page|integer|true|none||none|
-|» size|integer|true|none||none|
-|» totalElements|integer|true|none||none|
-|» totalPages|integer|true|none||none|
+| Name            | Type     | Required | Restrictions | Title | description |
+| --------------- | -------- | -------- | ------------ | ----- | ----------- |
+| » content       | [object] | true     | none         |       | none        |
+| »» id           | integer  | true     | none         |       | none        |
+| »» name         | string   | true     | none         |       | none        |
+| »» unit         | string   | true     | none         |       | none        |
+| »» price        | integer  | true     | none         |       | none        |
+| »» stock        | integer  | true     | none         |       | none        |
+| »» minStock     | integer  | true     | none         |       | none        |
+| »» expiryDate   | string   | true     | none         |       | none        |
+| »» status       | null     | true     | none         |       | none        |
+| »» createdAt    | integer  | true     | none         |       | none        |
+| »» updatedAt    | integer  | true     | none         |       | none        |
+| » page          | integer  | true     | none         |       | none        |
+| » size          | integer  | true     | none         |       | none        |
+| » totalElements | integer  | true     | none         |       | none        |
+| » totalPages    | integer  | true     | none         |       | none        |
 
 HTTP Status Code **400**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» error|string|true|none||none|
-|» message|string|true|none||none|
+| Name      | Type   | Required | Restrictions | Title | description |
+| --------- | ------ | -------- | ------------ | ----- | ----------- |
+| » error   | string | true     | none         |       | none        |
+| » message | string | true     | none         |       | none        |
 
 ## GET getNearExpiry
 
@@ -431,31 +443,39 @@ GET /medicines/near-expiry
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| HTTP Status Code | Meaning                                                          | Description | Data schema |
+| ---------------- | ---------------------------------------------------------------- | ----------- | ----------- |
+| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)          | none        | Inline      |
+| 400              | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1) | none        | Inline      |
 
 ### Responses Data Schema
 
 HTTP Status Code **200**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» content|[object]|true|none||none|
-|»» id|integer|false|none||none|
-|»» name|string|false|none||none|
-|»» unit|string|false|none||none|
-|»» price|integer|false|none||none|
-|»» stock|integer|false|none||none|
-|»» minStock|integer|false|none||none|
-|»» expiryDate|string|false|none||none|
-|»» status|null|false|none||none|
-|»» createdAt|integer|false|none||none|
-|»» updatedAt|integer|false|none||none|
-|» page|integer|true|none||none|
-|» size|integer|true|none||none|
-|» totalElements|integer|true|none||none|
-|» totalPages|integer|true|none||none|
+| Name            | Type     | Required | Restrictions | Title | description |
+| --------------- | -------- | -------- | ------------ | ----- | ----------- |
+| » content       | [object] | true     | none         |       | none        |
+| »» id           | integer  | false    | none         |       | none        |
+| »» name         | string   | false    | none         |       | none        |
+| »» unit         | string   | false    | none         |       | none        |
+| »» price        | integer  | false    | none         |       | none        |
+| »» stock        | integer  | false    | none         |       | none        |
+| »» minStock     | integer  | false    | none         |       | none        |
+| »» expiryDate   | string   | false    | none         |       | none        |
+| »» status       | null     | false    | none         |       | none        |
+| »» createdAt    | integer  | false    | none         |       | none        |
+| »» updatedAt    | integer  | false    | none         |       | none        |
+| » page          | integer  | true     | none         |       | none        |
+| » size          | integer  | true     | none         |       | none        |
+| » totalElements | integer  | true     | none         |       | none        |
+| » totalPages    | integer  | true     | none         |       | none        |
+
+HTTP Status Code **400**
+
+| Name      | Type   | Required | Restrictions | Title | description |
+| --------- | ------ | -------- | ------------ | ----- | ----------- |
+| » error   | string | true     | none         |       | none        |
+| » message | string | true     | none         |       | none        |
 
 # Patients
 
@@ -470,32 +490,47 @@ GET /patients
 ```json
 {
   "content": [
-    null
+    {
+      "id": 1,
+      "fullName": "John Doe",
+      "phone": "02193102930291",
+      "address": "Jl. Budi Utomo 1",
+      "createdAt": 1763130231873,
+      "updatedAt": 1763130241873
+    }
   ],
   "page": 0,
-  "size": 0,
-  "totalElements": 0,
-  "totalPages": 0
+  "size": 10,
+  "totalElements": 1,
+  "totalPages": 1
 }
 ```
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| HTTP Status Code | Meaning                                                          | Description | Data schema |
+| ---------------- | ---------------------------------------------------------------- | ----------- | ----------- |
+| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)          | none        | Inline      |
+| 400              | [Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1) | none        | Inline      |
 
 ### Responses Data Schema
 
 HTTP Status Code **200**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» content|[any]|true|none||none|
-|» page|integer|true|none||none|
-|» size|integer|true|none||none|
-|» totalElements|integer|true|none||none|
-|» totalPages|integer|true|none||none|
+| Name            | Type    | Required | Restrictions | Title | description |
+| --------------- | ------- | -------- | ------------ | ----- | ----------- |
+| » content       | [any]   | true     | none         |       | none        |
+| » page          | integer | true     | none         |       | none        |
+| » size          | integer | true     | none         |       | none        |
+| » totalElements | integer | true     | none         |       | none        |
+| » totalPages    | integer | true     | none         |       | none        |
+
+HTTP Status Code **400**
+
+| Name      | Type   | Required | Restrictions | Title | description |
+| --------- | ------ | -------- | ------------ | ----- | ----------- |
+| » error   | string | true     | none         |       | none        |
+| » message | string | true     | none         |       | none        |
 
 ## POST create
 
@@ -513,9 +548,9 @@ POST /patients
 
 ### Params
 
-|Name|Location|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object| yes |none|
+| Name | Location | Type   | Required | Description |
+| ---- | -------- | ------ | -------- | ----------- |
+| body | body     | object | yes      | none        |
 
 > Response Examples
 
@@ -523,33 +558,33 @@ POST /patients
 
 ```json
 {
-  "id": 0,
-  "fullName": "string",
-  "phone": "string",
-  "address": "string",
-  "createdAt": 0,
+  "id": 1,
+  "fullName": "John Doe",
+  "phone": "02193102930291",
+  "address": "Jl. Budi Utomo 1",
+  "createdAt": 1763130231873,
   "updatedAt": 0
 }
 ```
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|none|Inline|
+| HTTP Status Code | Meaning                                                      | Description | Data schema |
+| ---------------- | ------------------------------------------------------------ | ----------- | ----------- |
+| 201              | [Created](https://tools.ietf.org/html/rfc7231#section-6.3.2) | none        | Inline      |
 
 ### Responses Data Schema
 
 HTTP Status Code **201**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» id|integer|true|none||none|
-|» fullName|string|true|none||none|
-|» phone|string|true|none||none|
-|» address|string|true|none||none|
-|» createdAt|integer|true|none||none|
-|» updatedAt|integer|true|none||none|
+| Name        | Type    | Required | Restrictions | Title | description |
+| ----------- | ------- | -------- | ------------ | ----- | ----------- |
+| » id        | integer | true     | none         |       | none        |
+| » fullName  | string  | true     | none         |       | none        |
+| » phone     | string  | true     | none         |       | none        |
+| » address   | string  | true     | none         |       | none        |
+| » createdAt | integer | true     | none         |       | none        |
+| » updatedAt | integer | true     | none         |       | none        |
 
 ## GET getOne
 
@@ -557,29 +592,37 @@ GET /patients/1
 
 > Response Examples
 
-> 500 Response
+> 200 Response
 
 ```json
 {
-  "message": "string",
-  "error": "string"
+  "id": 1,
+  "fullName": "John Doe",
+  "phone": "02193102930291",
+  "address": "Jl. Budi Utomo 1",
+  "createdAt": 1763130231873,
+  "updatedAt": 1763130241873
 }
 ```
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|none|Inline|
+| HTTP Status Code | Meaning                                                  | Description | Data schema |
+| ---------------- | -------------------------------------------------------- | ----------- | ----------- |
+| 200              | [200](https://tools.ietf.org/html/rfc7231#section-6.3.2) | none        | Inline      |
 
 ### Responses Data Schema
 
-HTTP Status Code **500**
+HTTP Status Code **200**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» message|string|true|none||none|
-|» error|string|true|none||none|
+| Name        | Type    | Required | Restrictions | Title | description |
+| ----------- | ------- | -------- | ------------ | ----- | ----------- |
+| » id        | integer | true     | none         |       | none        |
+| » fullName  | string  | true     | none         |       | none        |
+| » phone     | string  | true     | none         |       | none        |
+| » address   | string  | true     | none         |       | none        |
+| » createdAt | integer | true     | none         |       | none        |
+| » updatedAt | integer | true     | none         |       | none        |
 
 ## PUT update
 
@@ -591,15 +634,15 @@ PUT /patients/2
 {
   "fullName": "John Cena",
   "phone": "0989128898",
-  "address": "Jl. Budi Utomo 1"
+  "address": "Jl. Ketapang 1"
 }
 ```
 
 ### Params
 
-|Name|Location|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|object| yes |none|
+| Name | Location | Type   | Required | Description |
+| ---- | -------- | ------ | -------- | ----------- |
+| body | body     | object | yes      | none        |
 
 > Response Examples
 
@@ -607,33 +650,33 @@ PUT /patients/2
 
 ```json
 {
-  "id": 0,
-  "fullName": "string",
-  "phone": "string",
-  "address": "string",
-  "createdAt": 0,
-  "updatedAt": 0
+  "id": 1,
+  "fullName": "John Cena",
+  "phone": "0989128898",
+  "address": "Jl. Ketapang 1",
+  "createdAt": 1763130231873,
+  "updatedAt": 1763130241873
 }
 ```
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|none|Inline|
+| HTTP Status Code | Meaning                                                  | Description | Data schema |
+| ---------------- | -------------------------------------------------------- | ----------- | ----------- |
+| 200              | [200](https://tools.ietf.org/html/rfc7231#section-6.3.2) | none        | Inline      |
 
 ### Responses Data Schema
 
-HTTP Status Code **201**
+HTTP Status Code **200**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» id|integer|true|none||none|
-|» fullName|string|true|none||none|
-|» phone|string|true|none||none|
-|» address|string|true|none||none|
-|» createdAt|integer|true|none||none|
-|» updatedAt|integer|true|none||none|
+| Name        | Type    | Required | Restrictions | Title | description |
+| ----------- | ------- | -------- | ------------ | ----- | ----------- |
+| » id        | integer | true     | none         |       | none        |
+| » fullName  | string  | true     | none         |       | none        |
+| » phone     | string  | true     | none         |       | none        |
+| » address   | string  | true     | none         |       | none        |
+| » createdAt | integer | true     | none         |       | none        |
+| » updatedAt | integer | true     | none         |       | none        |
 
 ## DELETE delete
 
@@ -645,23 +688,23 @@ DELETE /patients/2
 
 ```json
 {
-  "status": "string"
+  "status": "DELETED"
 }
 ```
 
 ### Responses
 
-|HTTP Status Code |Meaning|Description|Data schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+| HTTP Status Code | Meaning                                                 | Description | Data schema |
+| ---------------- | ------------------------------------------------------- | ----------- | ----------- |
+| 200              | [OK](https://tools.ietf.org/html/rfc7231#section-6.3.1) | none        | Inline      |
 
 ### Responses Data Schema
 
 HTTP Status Code **200**
 
-|Name|Type|Required|Restrictions|Title|description|
-|---|---|---|---|---|---|
-|» status|string|true|none||none|
+| Name     | Type   | Required | Restrictions | Title | description |
+| -------- | ------ | -------- | ------------ | ----- | ----------- |
+| » status | string | true     | none         |       | none        |
 
 # Data Schema
 
@@ -685,23 +728,22 @@ HTTP Status Code **200**
   "created_at": "CURRENT_TIMESTAMP",
   "updated_at": "CURRENT_TIMESTAMP"
 }
-
 ```
 
 ### Attribute
 
-|Name|Type|Required|Restrictions|Title|Description|
-|---|---|---|---|---|---|
-|id|integer|true|none||none|
-|name|string|true|none||none|
-|unit|string¦null|false|none||none|
-|price|number|true|none||none|
-|stock|integer|true|none||none|
-|min_stock|integer|true|none||none|
-|expiry_date|string(date)|true|none||none|
-|status|string¦null|false|none||none|
-|created_at|string¦null|false|none||none|
-|updated_at|string¦null|false|none||none|
+| Name        | Type         | Required | Restrictions | Title | Description |
+| ----------- | ------------ | -------- | ------------ | ----- | ----------- |
+| id          | integer      | true     | none         |       | none        |
+| name        | string       | true     | none         |       | none        |
+| unit        | string¦null  | false    | none         |       | none        |
+| price       | number       | true     | none         |       | none        |
+| stock       | integer      | true     | none         |       | none        |
+| min_stock   | integer      | true     | none         |       | none        |
+| expiry_date | string(date) | true     | none         |       | none        |
+| status      | string¦null  | false    | none         |       | none        |
+| created_at  | string¦null  | false    | none         |       | none        |
+| updated_at  | string¦null  | false    | none         |       | none        |
 
 <h2 id="tocS_Patients">Patients</h2>
 
@@ -719,17 +761,15 @@ HTTP Status Code **200**
   "created_at": "CURRENT_TIMESTAMP",
   "updated_at": "CURRENT_TIMESTAMP"
 }
-
 ```
 
 ### Attribute
 
-|Name|Type|Required|Restrictions|Title|Description|
-|---|---|---|---|---|---|
-|id|integer|true|none||none|
-|full_name|string|true|none||none|
-|phone|string¦null|false|none||none|
-|address|string¦null|false|none||none|
-|created_at|string¦null|false|none||none|
-|updated_at|string¦null|false|none||none|
-
+| Name       | Type        | Required | Restrictions | Title | Description |
+| ---------- | ----------- | -------- | ------------ | ----- | ----------- |
+| id         | integer     | true     | none         |       | none        |
+| full_name  | string      | true     | none         |       | none        |
+| phone      | string¦null | false    | none         |       | none        |
+| address    | string¦null | false    | none         |       | none        |
+| created_at | string¦null | false    | none         |       | none        |
+| updated_at | string¦null | false    | none         |       | none        |
