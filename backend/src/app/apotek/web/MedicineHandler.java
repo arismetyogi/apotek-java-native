@@ -10,16 +10,14 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.*;
 import java.sql.Date;
 
-public class MedicineController implements HttpHandler {
+public class MedicineHandler implements HttpHandler {
 
     private final MedicineDao dao;
 
-    public MedicineController(MedicineDao dao) {
+    public MedicineHandler(MedicineDao dao) {
         this.dao = dao;
     }
 

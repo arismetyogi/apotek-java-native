@@ -4,12 +4,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Patient {
-    protected long id;
-    protected String fullName;
-    protected String phone;
-    protected String address;
-    protected long createdAt;
-    protected long updatedAt;
+    public long id;
+    public String fullName;
+    public String phone;
+    public String address;
+    public long createdAt;
+    public long updatedAt;
     
     public Map<String, Object> toMap(){
         Map<String, Object> pat = new LinkedHashMap<>();

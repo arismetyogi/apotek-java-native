@@ -20,7 +20,7 @@ services:
 
   backend:
     build: 
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
       args:
         PG_JDBC_VER: "42.7.8"
@@ -34,6 +34,16 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: apotek_fe
+    ports:
+      - "5001:80"
+    depends_on:
+      backend:
 
 volumes:
   pgdata:
