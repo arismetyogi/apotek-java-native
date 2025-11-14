@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +26,11 @@ public class MedicineDao {
 
     public Medicine create(Medicine med) throws SQLException {
         String qString = """
-                INSERT INTO MEDICINES (name, unit, price, stock, min_stock, expiry_date, status)
-                VALUE (?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO medicines (name, unit, price, stock, min_stock, expiry_date, status)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 RETURNING id,name,unit,price,stock,min_stock,expiry_date,status,
-                EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
-                EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
+                        EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
+                        EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
                 """;
 
         try (
@@ -38,10 +39,10 @@ public class MedicineDao {
             ps.setString(1, med.name);
             ps.setString(2, med.unit);
             ps.setBigDecimal(3, med.price);
-            ps.setInt(5, med.stock);
-            ps.setInt(6, med.minStock);
-            ps.setLong(7, med.expiryDate);
-            ps.setString(8, med.status.toString());
+            ps.setInt(4, med.stock);
+            ps.setInt(5, med.minStock);
+            ps.setDate(6, med.expiryDate);
+            ps.setString(7, med.status.toString());
 
             try (ResultSet rSet = ps.executeQuery()) {
                 if (rSet.next()) {
@@ -56,8 +57,9 @@ public class MedicineDao {
 
     public Medicine findById(long id) throws SQLException {
         String qString = """
-                SELECT id, name, unit, price, stock, min_stock, expiry_data, status, EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
-                EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
+                SELECT id, name, unit, price, stock, min_stock, expiry_date, status, 
+                    EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
+                    EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
                 FROM medicines WHERE id = ?
                 """;
 
@@ -89,7 +91,7 @@ public class MedicineDao {
             ps.setBigDecimal(3, updated.price);
             ps.setInt(4, updated.stock);
             ps.setInt(5, updated.minStock);
-            ps.setLong(6, updated.expiryDate);
+            ps.setDate(6, updated.expiryDate);
             ps.setString(7, updated.status.toString());
             ps.setLong(8, id);
             try (ResultSet rs = ps.executeQuery()) {
@@ -190,7 +192,7 @@ public class MedicineDao {
         }
 
         String sql = """
-            SELECT id, name, unit, price, stock, min_stock, status,
+            SELECT id, name, unit, price, stock, min_stock, expiry_date, status,
                    EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
                    EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
               FROM medicines
@@ -230,7 +232,7 @@ public class MedicineDao {
         it.price = rs.getBigDecimal("price");
         it.stock = rs.getInt("stock");
         it.minStock = rs.getInt("min_stock");
-        it.expiryDate = rs.getLong("expiry_date");
+        it.expiryDate = rs.getDate("expiry_date");
         it.createdAt = rs.getLong("created_ms");
         return it;
     }

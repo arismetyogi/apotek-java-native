@@ -1,6 +1,9 @@
 package app.apotek.model;
 
 import java.math.BigDecimal;
+import java.security.Timestamp;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,7 +14,7 @@ public class Medicine {
     public BigDecimal price;
     public int stock;
     public int minStock;
-    public long expiryDate;
+    public Date expiryDate;
     public Status status;
     public long createdAt;
     public long updatedAt;

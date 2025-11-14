@@ -10,7 +10,10 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
+import java.sql.Date;
 
 public class MedicineController implements HttpHandler {
 
@@ -107,7 +110,7 @@ public class MedicineController implements HttpHandler {
         it.price = new BigDecimal(data.get("price"));
         it.stock = Integer.parseInt(data.get("stock"));
         it.minStock = Integer.parseInt(data.get("minStock"));
-        it.expiryDate = Long.parseLong(data.get("expiryDate"));
+        it.expiryDate = Date.valueOf(data.get("expiryDate"));
         it.status = Status.valueOf(data.get("status").trim().toString().toUpperCase());
 
         dao.create(it);
@@ -135,7 +138,7 @@ public class MedicineController implements HttpHandler {
         newVal.price = new BigDecimal(data.get("price"));
         newVal.stock = Integer.parseInt(data.get("stock"));
         newVal.minStock = Integer.parseInt(data.get("minStock"));
-        newVal.expiryDate = Long.parseLong(data.get("expiryDate"));
+        newVal.expiryDate = Date.valueOf(data.get("expiryDate"));
         newVal.status = Status.valueOf(data.get("status").trim().toString().toUpperCase());
 
         Medicine updated = dao.update(id, newVal);
