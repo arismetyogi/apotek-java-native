@@ -431,6 +431,16 @@ dialog h3 {
     font-size: 1rem;
 }
 
+.grid select option {
+    background: var(--card);
+    color: var(--text-dark);
+}
+
+.grid select option:checked {
+    background: var(--card);
+    color: var(--text-dark);
+}
+
 .grid input:focus,
 .grid select:focus {
     outline: none;
