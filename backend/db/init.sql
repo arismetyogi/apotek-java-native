@@ -26,3 +26,12 @@ CREATE TABLE patients (
 
 CREATE INDEX IF NOT EXISTS idx_patients_full_name ON patients (full_name);
 CREATE INDEX IF NOT EXISTS idx_patients_phone ON patients (phone);
+
+
+INSERT INTO medicines ("name",unit,price,stock,min_stock,expiry_date,status,created_at,updated_at) VALUES
+	 ('Panadol Tablet','TAB',2000.00,100,30,'2026-12-31','ACTIVE','2025-11-14 14:11:18.950509','2025-11-14 14:11:18.950509'),
+	 ('Viagra','TAB',180000.00,10,2,'2028-10-31','ACTIVE','2025-11-14 14:21:46.051337','2025-11-14 14:21:46.051337'),
+	 ('Alco Plus DMP','BTL',62000.00,10,4,'2027-10-11','ACTIVE','2025-11-14 14:23:07.702331','2025-11-14 14:23:07.702331'),
+	 ('Alco Plus Exp','BTL',62000.00,12,4,'2027-10-11','ACTIVE','2025-11-14 14:23:22.364247','2025-11-14 14:23:22.364247'),
+	 ('Nutrimax C plus','BTL',360000.00,4,6,'2027-10-11','ACTIVE','2025-11-14 15:21:27.796627','2025-11-14 15:21:27.796627'),
+	 ('Nutrimax B Complex','BTL',120000.00,4,6,'2025-11-30','ACTIVE','2025-11-14 15:50:45.393095','2025-11-14 15:50:45.393095');

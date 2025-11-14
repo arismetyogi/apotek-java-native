@@ -156,10 +156,10 @@ public class PatientDao {
     private static Patient map(ResultSet rs) throws SQLException {
         Patient pat = new Patient();
         pat.id = rs.getLong("id");
-        pat.fullName = rs.getString("fullName");
+        pat.fullName = rs.getString("full_name");
         pat.phone = rs.getString("phone");
-        pat.address = rs.getString("price");
         pat.createdAt = rs.getLong("created_ms");
+        pat.updatedAt = rs.getLong("updated_ms");
         return pat;
     }
 }

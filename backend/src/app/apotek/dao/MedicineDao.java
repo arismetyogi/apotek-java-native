@@ -320,6 +320,7 @@ public class MedicineDao {
         it.minStock = rs.getInt("min_stock");
         it.expiryDate = rs.getDate("expiry_date");
         it.createdAt = rs.getLong("created_ms");
+        it.updatedAt = rs.getLong("updated_ms");
         return it;
     }
 }
