@@ -20,4 +20,4 @@ COPY --from=build /app/lib/postgresql.jar /app/lib/
 
 EXPOSE 8081
 
-CMD [ "java", "-cp", "/app/out:/app/lib/postgresql.jar", "app.inventory.App" ]
+CMD [ "java", "-cp", "/app/out:/app/lib/postgresql.jar", "app.apotek.App" ]
