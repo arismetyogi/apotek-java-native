@@ -1,4 +1,4 @@
-package app.inventory.util;
+package app.apotek.util;
 
 import java.nio.charset.StandardCharsets;
 import java.util.*;

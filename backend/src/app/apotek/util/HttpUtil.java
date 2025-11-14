@@ -1,4 +1,4 @@
-package app.inventory.util;
+package app.apotek.util;
 
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
