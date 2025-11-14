@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import app.apotek.db.Db;
 import app.apotek.model.Medicine;
+import app.apotek.db.Db;
 
 public class MedicineDao {
 

@@ -9,6 +9,7 @@ public class Patient {
     protected String phone;
     protected String address;
     protected long createdAt;
+    protected long updatedAt;
     
     public Map<String, Object> toMap(){
         Map<String, Object> pat = new LinkedHashMap<>();
@@ -18,12 +19,7 @@ public class Patient {
         pat.put("phone", phone);
         pat.put("address", address);
         pat.put("createdAt", createdAt);
+        pat.put("updatedAt", updatedAt);
         return pat;
     }
 }
-
-// id SERIAL PRIMARY KEY,
-// full_name VARCHAR(100) NOT NULL,
-// phone VARCHAR(20),
-// address TEXT,
-// created_at TIMESTAMP DEFAULT CURRENT_TIMESTAM
