@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: apotek_db
+    environment:
+      POSTGRES_DB: apotek_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      TZ: Asia/Jakarta
+    ports:
+      - "5434:5432" # exists 5432 for global postgresql db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01.schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d apotek_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PG_JDBC_VER: "42.7.8"
+    container_name: apotek_be
+    environment:
+      PG_URL: jdbc:postgresql://db:5432/apotek_db
+      PG_USER: postgres
+      PG_PASS: postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+
+    
