@@ -255,7 +255,7 @@ public class MedicineDao {
         StringBuilder where = new StringBuilder(" WHERE 1=1 ");
         List<Object> params = new ArrayList<>();
         if (q != null && !q.isBlank()) {
-            where.append(" LOWER(name) LIKE LOWER(?) ");
+            where.append(" AND LOWER(name) LIKE LOWER(?) ");
             String like = "%" + q.trim() + "%";
             params.add(like);
         }
