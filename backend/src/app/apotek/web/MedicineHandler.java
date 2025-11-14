@@ -31,7 +31,11 @@ public class MedicineHandler implements HttpHandler {
             }
             String method = ex.getRequestMethod();
             String path = ex.getRequestURI().getPath(); // /Medicines, /Medicines/{id}, /Medicines/{id}/adjust
+            System.out.println(ex.getRequestURI());
             String[] parts = path.split("/");
+            for (String part : parts) {
+                System.out.println("part: "+ part);
+            }
 
             if (parts.length == 2) {
                 switch (method) {
@@ -39,6 +43,18 @@ public class MedicineHandler implements HttpHandler {
                     case "POST" -> handleCreate(ex);
                     default     -> ex.sendResponseHeaders(405, -1);
                 }
+                return;
+            }
+            
+            if (parts.length == 3 && "low-stock".equalsIgnoreCase(parts[2])) {
+                if (!"GET".equals(method)) { ex.sendResponseHeaders(405, -1); return; }
+                handleLowStock(ex);
+                return;
+            }
+            
+            if (parts.length == 3 && "near-expiry".equalsIgnoreCase(parts[2])) {
+                if (!"GET".equals(method)) { ex.sendResponseHeaders(405, -1); return; }
+                handleNearExpiry(ex);
                 return;
             }
 
@@ -53,7 +69,7 @@ public class MedicineHandler implements HttpHandler {
                 }
                 return;
             }
-
+            
             if (parts.length == 4 && "adjust".equalsIgnoreCase(parts[3])) {
                 if (!"POST".equals(method)) { ex.sendResponseHeaders(405, -1); return; }
                 Long id = HttpUtil.parseLong(parts[2]);
@@ -93,6 +109,42 @@ public class MedicineHandler implements HttpHandler {
         resp.put("size", size);
         resp.put("totalElements", pr.total);
         resp.put("totalPages", (int)Math.ceil(pr.total / (double)size));
+        HttpUtil.sendJson(ex, 200, resp);
+    }
+
+    private void handleLowStock(HttpExchange ex) throws Exception {
+        var q = HttpUtil.query(ex.getRequestURI());
+        int page = HttpUtil.parseInt(q.get("page"), 0);
+        int size = Math.max(1, HttpUtil.parseInt(q.get("size"), 10));
+
+        MedicineDao.PageResult<Medicine> med = dao.lowStock(page, size);
+        List<Map<String,Object>> rows = new ArrayList<>();
+        for (Medicine it : med.rows) rows.add(it.toMap());
+
+        Map<String,Object> resp = new LinkedHashMap<>();
+        resp.put("content", rows);
+        resp.put("page", page);
+        resp.put("size", size);
+        resp.put("totalElements", med.total);
+        resp.put("totalPages", (int)Math.ceil(med.total / (double)size));
+        HttpUtil.sendJson(ex, 200, resp);
+    }
+
+    private void handleNearExpiry(HttpExchange ex) throws Exception {
+        var q = HttpUtil.query(ex.getRequestURI());
+        int page = HttpUtil.parseInt(q.get("page"), 0);
+        int size = Math.max(1, HttpUtil.parseInt(q.get("size"), 10));
+
+        MedicineDao.PageResult<Medicine> med = dao.nearExpiry(page, size);
+        List<Map<String,Object>> rows = new ArrayList<>();
+        for (Medicine it : med.rows) rows.add(it.toMap());
+
+        Map<String,Object> resp = new LinkedHashMap<>();
+        resp.put("content", rows);
+        resp.put("page", page);
+        resp.put("size", size);
+        resp.put("totalElements", med.total);
+        resp.put("totalPages", (int)Math.ceil(med.total / (double)size));
         HttpUtil.sendJson(ex, 200, resp);
     }
 

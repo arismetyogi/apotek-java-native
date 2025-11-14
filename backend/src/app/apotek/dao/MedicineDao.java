@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.apotek.model.Medicine;
+import app.apotek.model.Status;
 import app.apotek.db.Db;
 
 public class MedicineDao {
@@ -56,7 +57,7 @@ public class MedicineDao {
 
     public Medicine findById(long id) throws SQLException {
         String qString = """
-                SELECT id, name, unit, price, stock, min_stock, expiry_date, status, 
+                SELECT id, name, unit, price, stock, min_stock, expiry_date, status,
                     EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
                     EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
                 FROM medicines WHERE id = ?
@@ -103,7 +104,7 @@ public class MedicineDao {
 
     public boolean delete(long id) throws SQLException {
         try (Connection c = Db.getConnection();
-             PreparedStatement ps = c.prepareStatement("DELETE FROM medicines WHERE id=?")) {
+                PreparedStatement ps = c.prepareStatement("DELETE FROM medicines WHERE id=?")) {
             ps.setLong(1, id);
             return ps.executeUpdate() > 0;
         }
@@ -113,13 +114,89 @@ public class MedicineDao {
         String sql = "SELECT 1 FROM medicines WHERE LOWER(name)=LOWER(?)" +
                 (excludeId != null ? " AND id<>?" : "") + " LIMIT 1";
         try (Connection c = Db.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+                PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, name);
-            if (excludeId != null) ps.setLong(2, excludeId);
+            if (excludeId != null)
+                ps.setLong(2, excludeId);
             try (ResultSet rs = ps.executeQuery()) {
                 return rs.next();
             }
         }
+    }
+
+    public PageResult<Medicine> lowStock(int page, int size) throws SQLException {
+        StringBuilder where = new StringBuilder(" WHERE 1=1 AND stock < min_stock ");
+        List<Object> params = new ArrayList<>();
+
+        long total;
+        String sqlCount = "SELECT COUNT(*) FROM medicines " + where;
+        try (Connection c = Db.getConnection();
+                PreparedStatement ps = c.prepareStatement(sqlCount)) {
+            bind(ps, params);
+            try (ResultSet rs = ps.executeQuery()) {
+                rs.next();
+                total = rs.getLong(1);
+            }
+        }
+
+        String sql = """
+                SELECT id, name, unit, price, stock, min_stock, expiry_date, status,
+                       EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
+                       EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
+                  FROM medicines
+                """ + where + " ORDER BY stock ASC LIMIT ? OFFSET ?";
+
+        List<Medicine> rows = new ArrayList<>();
+        try (Connection c = Db.getConnection();
+                PreparedStatement ps = c.prepareStatement(sql)) {
+            List<Object> p2 = new ArrayList<>(params);
+            p2.add(size);
+            p2.add(page * (long) size);
+            bind(ps, p2);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next())
+                    rows.add(map(rs));
+            }
+        }
+        return new PageResult<>(rows, total);
+    }
+
+    public PageResult<Medicine> nearExpiry(int page, int size) throws SQLException {
+
+        StringBuilder where = new StringBuilder(" WHERE 1=1 AND expiry_date < CURRENT_DATE + INTERVAL '30 days' ");
+        List<Object> params = new ArrayList<>();
+
+        long total;
+        String sqlCount = "SELECT COUNT(*) FROM medicines " + where;
+        try (Connection c = Db.getConnection();
+                PreparedStatement ps = c.prepareStatement(sqlCount)) {
+            bind(ps, params);
+            try (ResultSet rs = ps.executeQuery()) {
+                rs.next();
+                total = rs.getLong(1);
+            }
+        }
+
+        String sql = """
+                SELECT id, name, unit, price, stock, min_stock, expiry_date, status,
+                       EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
+                       EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
+                  FROM medicines
+                """ + where + " ORDER BY expiry_date ASC LIMIT ? OFFSET ?";
+
+        List<Medicine> rows = new ArrayList<>();
+        try (Connection c = Db.getConnection();
+                PreparedStatement ps = c.prepareStatement(sql)) {
+            List<Object> p2 = new ArrayList<>(params);
+            p2.add(size);
+            p2.add(page * (long) size);
+            bind(ps, p2);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next())
+                    rows.add(map(rs));
+            }
+        }
+        return new PageResult<>(rows, total);
     }
 
     // ---- Adjust stok (transaksional) ----
@@ -132,7 +209,10 @@ public class MedicineDao {
                 try (PreparedStatement ps = c.prepareStatement("SELECT stock FROM medicines WHERE id=? FOR UPDATE")) {
                     ps.setLong(1, id);
                     try (ResultSet rs = ps.executeQuery()) {
-                        if (!rs.next()) { c.rollback(); return null; }
+                        if (!rs.next()) {
+                            c.rollback();
+                            return null;
+                        }
                         curStock = rs.getInt(1);
                     }
                 }
@@ -143,12 +223,12 @@ public class MedicineDao {
                 }
                 // Update
                 try (PreparedStatement ps = c.prepareStatement("""
-                    UPDATE medicines SET stock=?, updated_at=NOW()
-                     WHERE id=?
-                 RETURNING id, name, unit, price, stock, min_stock, status,
-                           EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
-                           EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
-                    """)) {
+                           UPDATE medicines SET stock=?, updated_at=NOW()
+                            WHERE id=?
+                        RETURNING id, name, unit, price, stock, min_stock, status,
+                                  EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
+                                  EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
+                           """)) {
                     ps.setInt(1, newStock);
                     ps.setLong(2, id);
                     try (ResultSet rs = ps.executeQuery()) {
@@ -183,29 +263,31 @@ public class MedicineDao {
         long total;
         String sqlCount = "SELECT COUNT(*) FROM medicines " + where;
         try (Connection c = Db.getConnection();
-             PreparedStatement ps = c.prepareStatement(sqlCount)) {
+                PreparedStatement ps = c.prepareStatement(sqlCount)) {
             bind(ps, params);
             try (ResultSet rs = ps.executeQuery()) {
-                rs.next(); total = rs.getLong(1);
+                rs.next();
+                total = rs.getLong(1);
             }
         }
 
         String sql = """
-            SELECT id, name, unit, price, stock, min_stock, expiry_date, status,
-                   EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
-                   EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
-              FROM medicines
-            """ + where + " ORDER BY id ASC LIMIT ? OFFSET ?";
+                SELECT id, name, unit, price, stock, min_stock, expiry_date, status,
+                       EXTRACT(EPOCH FROM created_at)*1000 AS created_ms,
+                       EXTRACT(EPOCH FROM updated_at)*1000 AS updated_ms
+                  FROM medicines
+                """ + where + " ORDER BY id ASC LIMIT ? OFFSET ?";
 
         List<Medicine> rows = new ArrayList<>();
         try (Connection c = Db.getConnection();
-             PreparedStatement ps = c.prepareStatement(sql)) {
+                PreparedStatement ps = c.prepareStatement(sql)) {
             List<Object> p2 = new ArrayList<>(params);
             p2.add(size);
-            p2.add(page * (long)size);
+            p2.add(page * (long) size);
             bind(ps, p2);
             try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) rows.add(map(rs));
+                while (rs.next())
+                    rows.add(map(rs));
             }
         }
         return new PageResult<>(rows, total);
@@ -213,13 +295,18 @@ public class MedicineDao {
 
     // ---- helpers ----
     private static void bind(PreparedStatement ps, List<Object> params) throws SQLException {
-        for (int i=0;i<params.size();i++) {
+        for (int i = 0; i < params.size(); i++) {
             Object v = params.get(i);
-            if (v instanceof String s) ps.setString(i+1, s);
-            else if (v instanceof Integer n) ps.setInt(i+1, n);
-            else if (v instanceof Long l) ps.setLong(i+1, l);
-            else if (v instanceof BigDecimal b) ps.setBigDecimal(i+1, b);
-            else ps.setObject(i+1, v);
+            if (v instanceof String s)
+                ps.setString(i + 1, s);
+            else if (v instanceof Integer n)
+                ps.setInt(i + 1, n);
+            else if (v instanceof Long l)
+                ps.setLong(i + 1, l);
+            else if (v instanceof BigDecimal b)
+                ps.setBigDecimal(i + 1, b);
+            else
+                ps.setObject(i + 1, v);
         }
     }
 
