@@ -1,6 +1,6 @@
 // API functions for Pharmacy POS
 class PharmacyAPI {
-    constructor(baseURL = 'http://localhost:8080/api') {
+    constructor(baseURL = 'http://localhost:8080') {
         this.baseURL = baseURL;
     }
 
@@ -164,8 +164,133 @@ class PharmacyAPI {
         }
     }
 
+    // Prescription-related API calls
+    async getPrescriptions() {
+        try {
+            const response = await fetch(`${this.baseURL}/prescriptions`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching prescriptions:', error);
+            throw error;
+        }
+    }
+
+    async getPrescriptionById(id) {
+        try {
+            const response = await fetch(`${this.baseURL}/prescriptions/${id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Error fetching prescription with id ${id}:`, error);
+            throw error;
+        }
+    }
+
+    async addPrescription(prescriptionData) {
+        try {
+            const response = await fetch(`${this.baseURL}/prescriptions`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(prescriptionData),
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error adding prescription:', error);
+            throw error;
+        }
+    }
+
+    async updatePrescription(id, prescriptionData) {
+        try {
+            const response = await fetch(`${this.baseURL}/prescriptions/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(prescriptionData),
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Error updating prescription with id ${id}:`, error);
+            throw error;
+        }
+    }
+
+    async deletePrescription(id) {
+        try {
+            const response = await fetch(`${this.baseURL}/prescriptions/${id}`, {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Error deleting prescription with id ${id}:`, error);
+            throw error;
+        }
+    }
+
+    // POS transaction API calls
+    async createTransaction(transactionData) {
+        try {
+            const response = await fetch(`${this.baseURL}/transactions`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(transactionData),
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error creating transaction:', error);
+            throw error;
+        }
+    }
+
+    async getTransactions() {
+        try {
+            const response = await fetch(`${this.baseURL}/transactions`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching transactions:', error);
+            throw error;
+        }
+    }
+
+    async getTransactionById(id) {
+        try {
+            const response = await fetch(`${this.baseURL}/transactions/${id}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(`Error fetching transaction with id ${id}:`, error);
+            throw error;
+        }
+    }
 }
 
-// Initialize the API instance and make it available globally
+// Export the API class for use in other modules
 const pharmacyAPI = new PharmacyAPI();
-window.pharmacyAPI = pharmacyAPI; // Make it accessible globally for browser usage
+export default pharmacyAPI;

@@ -1,223 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <title>Apotek Sehat Sentosa - POS</title>
+    <link href="./style.css" rel="stylesheet">
+    <title>Apotek Sehat Sentosa</title>
 </head>
+
 <body>
-    <header>
-        <div class="header-container">
-            <h1>Apotek Sehat Sentosa</h1>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#medicines" class="nav-link active">Medicines</a></li>
-                    <li><a href="#patients" class="nav-link">Patients</a></li>
-                    </ul>
-            </nav>
+    <header class="container">
+        <h1>Inventory UI</h1>
+        <div class="toolbar">
+            <input id="searchInput" type="search" placeholder="Cari nama / SKU..." />
+            <button id="btnSearch">Search</button>
+            <button id="btnNew">+ Obat Baru</button>
         </div>
     </header>
 
     <main class="container">
-        <!-- Medicines Section -->
-        <section id="medicines" class="active-section">
-            <div class="section-header">
-                <h2>Medicine Inventory</h2>
-                <button class="btn primary-btn">Add New Medicine</button>
-            </div>
-
-            <div class="toolbar">
-                <input type="text" placeholder="Search medicines..." id="med-search">
-                <button class="btn search-btn">Search</button>
-            </div>
-
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Medicine</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Paracetamol 500mg</td>
-                            <td>Pain Relief</td>
-                            <td class="num">Rp 5.000</td>
-                            <td class="num">150</td>
-                            <td class="actions">
-                                <button class="btn add-to-cart-btn">Add to Cart</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ibuprofen 200mg</td>
-                            <td>Pain Relief</td>
-                            <td class="num">Rp 7.500</td>
-                            <td class="num">85</td>
-                            <td class="actions">
-                                <button class="btn add-to-cart-btn">Add to Cart</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Amoxicillin 500mg</td>
-                            <td>Antibiotic</td>
-                            <td class="num">Rp 12.000</td>
-                            <td class="num">45</td>
-                            <td class="actions">
-                                <button class="btn add-to-cart-btn">Add to Cart</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Vitamin C 1000mg</td>
-                            <td>Vitamins</td>
-                            <td class="num">Rp 8.000</td>
-                            <td class="num">120</td>
-                            <td class="actions">
-                                <button class="btn add-to-cart-btn">Add to Cart</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Patients Section -->
-        <section id="patients">
-            <div class="section-header">
-                <h2>Patients</h2>
-                <button class="btn primary-btn">Add New Patient</button>
-            </div>
-
-            <div class="toolbar">
-                <input type="text" placeholder="Search patients..." id="patient-search">
-                <button class="btn search-btn">Search</button>
-            </div>
-
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Patient ID</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Last Visit</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#P001</td>
-                            <td>John Doe</td>
-                            <td>+62 812 3456 7890</td>
-                            <td>2023-11-10</td>
-                            <td class="actions">
-                                <button class="btn view-btn">View</button>
-                                <button class="btn edit-btn">Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#P002</td>
-                            <td>Jane Smith</td>
-                            <td>+62 813 4567 8901</td>
-                            <td>2023-11-12</td>
-                            <td class="actions">
-                                <button class="btn view-btn">View</button>
-                                <button class="btn edit-btn">Edit</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#P003</td>
-                            <td>Robert Johnson</td>
-                            <td>+62 814 5678 9012</td>
-                            <td>2023-11-08</td>
-                            <td class="actions">
-                                <button class="btn view-btn">View</button>
-                                <button class="btn edit-btn">Edit</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- POS Section -->
-        <section id="pos">
-            <div class="section-header">
-                <h2>Point of Sale</h2>
-            </div>
-
-            <div class="pos-container">
-                <div class="cart-section">
-                    <h3>Current Transaction</h3>
-                    <div class="cart-items">
-                        <div class="cart-item">
-                            <div class="item-info">
-                                <h4>Paracetamol 500mg</h4>
-                                <p>x2</p>
-                            </div>
-                            <div class="item-price">
-                                Rp 10.000
-                            </div>
-                            <button class="btn remove-btn">Remove</button>
-                        </div>
-                        <div class="cart-item">
-                            <div class="item-info">
-                                <h4>Vitamin C 1000mg</h4>
-                                <p>x1</p>
-                            </div>
-                            <div class="item-price">
-                                Rp 8.000
-                            </div>
-                            <button class="btn remove-btn">Remove</button>
-                        </div>
-                    </div>
-
-                    <div class="cart-total">
-                        <div class="total-row">
-                            <span>Subtotal:</span>
-                            <span>Rp 18.000</span>
-                        </div>
-                        <div class="total-row">
-                            <span>Discount:</span>
-                            <span>Rp 0</span>
-                        </div>
-                        <div class="total-row total">
-                            <span>Total:</span>
-                            <span>Rp 18.000</span>
-                        </div>
-                    </div>
-
-                    <div class="cart-actions">
-                        <button class="btn cancel-btn">Cancel Transaction</button>
-                        <button class="btn primary-btn checkout-btn">Checkout</button>
-                    </div>
-                </div>
-
-                <div class="patient-info">
-                    <h3>Customer Information</h3>
-                    <div class="input-group">
-                        <label for="patient-id">Patient ID</label>
-                        <input type="text" id="patient-id" placeholder="Enter patient ID or search">
-                    </div>
-                    <div class="input-group">
-                        <label for="patient-name">Patient Name</label>
-                        <input type="text" id="patient-name" placeholder="Patient name will appear here" disabled>
-                    </div>
-                    <div class="input-group">
-                        <label for="prescription-id">Prescription ID (Optional)</label>
-                        <input type="text" id="prescription-id" placeholder="Enter prescription ID">
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Unit</th>
+                        <th>Harga</th>
+                        <th class="num">Stock</th>
+                        <th class="num">Status</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <button id="prevPage">&lt; Prev</button>
+            <span id="pageInfo"></span>
+            <button id="nextPage">Next &gt;</button>
+            <label class="page-size">Size:
+                <select id="sizeSel">
+                    <option>5</option>
+                    <option selected>10</option>
+                    <option>20</option>
+                </select>
+            </label>
+        </div>
     </main>
 
-    <script src="src/api.js"></script>
-    <script src="src/index.js"></script>
+    <!-- Dialog Create/Edit -->
+    <dialog id="dlgItem">
+        <form method="dialog" id="formItem">
+            <h3 id="dlgTitle">Obat</h3>
+            <div class="grid">
+                <label>Nama <input name="name" required /></label>
+                <label>Unit <input name="unit" required /></label>
+                <label>Unit Price <input name="price" type="number" min="0" step="0.01" required /></label>
+                <label>Stock <input name="stock" type="number" min="0" step="1" required /></label>
+                <label>Min Stock <input name="minStock" type="number" min="0" step="1" required /></label>
+                <label>Tgl Expire <input name="expiryDate" type="date" min="0" step="1" required /></label>
+                <label>Status <input name="status" required /></label>
+            </div>
+            <menu>
+                <button value="cancel" class="secondary">Batal</button>
+                <button value="default" class="primary">Simpan</button>
+            </menu>
+        </form>
+    </dialog>
+
+    <!-- Dialog Adjust -->
+    <dialog id="dlgAdjust">
+        <form method="dialog" id="formAdjust">
+            <h3>Adjust Stok</h3>
+            <p>Masukkan delta (contoh: <code>10</code> atau <code>-5</code>)</p>
+            <label>Delta <input name="delta" type="number" step="1" required /></label>
+            <menu>
+                <button value="cancel" class="secondary">Batal</button>
+                <button value="default" class="primary">Update Stok</button>
+            </menu>
+        </form>
+    </dialog>
+
+    <footer class="container footnote">
+        <small>UI HTML • API via async/await ES Modules</small>
+    </footer>
+
+    <!-- KUNCI: pakai type="module" untuk bisa import ES Modules -->
+    <script type="module" src="./src/app.js"></script>
+
 </body>
+
 </html>
