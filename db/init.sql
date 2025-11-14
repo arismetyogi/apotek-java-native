@@ -8,6 +8,7 @@ CREATE TABLE medicines (
  expiry_date DATE NOT NULL,
  status VARCHAR(20) DEFAULT 'ACTIVE', -- ACTIVE / INACTIVE
  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX IF NOT EXISTS idx_medicines_name ON medicines (name);
@@ -20,6 +21,7 @@ CREATE TABLE patients (
  phone VARCHAR(20),
  address TEXT,
  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+ updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX IF NOT EXISTS idx_patients_full_name ON patients (full_name);

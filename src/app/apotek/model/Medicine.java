@@ -1,20 +1,20 @@
 package app.apotek.model;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Medicine {
-    protected long id;
-    protected String name;
-    protected String unit;
-    protected BigDecimal price;
-    protected int stock;
-    protected int minStock;
-    protected Timestamp expiryDate;
-    protected Status status;
-    protected long createdAt;
+    public long id;
+    public String name;
+    public String unit;
+    public BigDecimal price;
+    public int stock;
+    public int minStock;
+    public long expiryDate;
+    public Status status;
+    public long createdAt;
+    public long updatedAt;
 
     public Map<String, Object> toMap() {
         Map<String, Object> med = new LinkedHashMap<>();
@@ -28,6 +28,7 @@ public class Medicine {
         med.put("expiryDate", expiryDate);
         med.put("status", status);
         med.put("createdAt", createdAt);
+        med.put("updatedAt", updatedAt);
         return med;
     }
 
